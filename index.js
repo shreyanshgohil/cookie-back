@@ -1,40 +1,34 @@
-import express from "express";
+import MongoDBSession from 'connect-mongodb-session';
 import cors from "cors";
 import { config } from "dotenv";
+import express from "express";
 import session from "express-session";
-import pgSession from "connect-pg-simple";
-import pkg from 'pg';
-const { Pool } = pkg;
+
 
 config();
 const app = express();
 app.use(express.json());
 app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
 
-const pool = new Pool({
-  user: "shreyansh",
-  host: "dpg-ck58pb6ru70s739btcjg-a.oregon-postgres.render.com",
-  database: "cookie",
-  password: "kmkFG96nttyaqKAdysTXoldWzFxPACwN",
-  port: 5432,
-});
+const MongoDbStore = MongoDBSession(session);
 
-const PgSession = pgSession(session);
+
+const store = new MongoDbStore({
+  uri: "mongodb+srv://shreyansh:fK2OXSG2gwFJiYfp@cluster0.q1f2mq0.mongodb.net/",
+  collection: 'sessions',
+});
 
 app.use(
   session({
-    store: new PgSession({
-      pool: pool, // provide the Prisma instance connection
-      tableName: "session", // specify the name of the session table in the database
-    }),
-    secret: config?.sessionSecretKey,
+    secret: "DDSDKSDMKDMSKMDD",
     resave: false,
     saveUninitialized: false,
+    store,
     cookie: {
       secure: true,
       httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
       sameSite: "none",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // Session expiration time (1 day) - time in milliseconds
     },
   })
 );

@@ -3,7 +3,8 @@ import cors from "cors";
 import { config } from "dotenv";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
-import { Pool } from "pg";
+import pkg from 'pg';
+const { Pool } = pkg;
 
 config();
 const app = express();

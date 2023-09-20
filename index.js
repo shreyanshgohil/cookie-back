@@ -12,7 +12,7 @@ app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
 
 const pool = new Pool({
   user: "shreyansh",
-  host: "dpg-ck58pb6ru70s739btcjg-a",
+  host: "dpg-ck58pb6ru70s739btcjg-a.oregon-postgres.render.com",
   database: "cookie",
   password: "kmkFG96nttyaqKAdysTXoldWzFxPACwN",
   port: 5432,

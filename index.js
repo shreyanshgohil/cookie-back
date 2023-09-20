@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors({ credentials: true, origin: process.env.ORIGIN }));
 
 app.post('/hello-wrold',(req,res,next)=>{
-  res.cookie("hello","world",{
+  res.cookie("hello","From abc",{
     httpOnly:true,
     maxAge: 60 * 60 * 1000,
     sameSite:"none"

@@ -11,6 +11,7 @@ app.post('/hello-wrold',(req,res,next)=>{
   res.cookie("hello","world",{
     httpOnly:true,
     maxAge: 60 * 60 * 1000,
+    sameSite:"none"
   }).json({"Done":"Done"})
 })
 
